@@ -19,6 +19,7 @@ include_directories(${EXTERNAL_LIBS_DIR}/imgui)
 
 set(INTERFACE_FILES
   ${PATH_TO_FILES}/headers/interfaces/IWindow.hpp
+  ${PATH_TO_FILES}/headers/interfaces/IUserInterface.hpp
 )
 
 set(IMGUI_HEADERS
@@ -35,6 +36,7 @@ set(IMGUI_HEADERS
 
 set(HEADER_FILES
   ${PATH_TO_FILES}/headers/Window.hpp
+  ${PATH_TO_FILES}/headers/UserInterface.hpp
   ${IMGUI_HEADERS}
 )
 
@@ -49,6 +51,7 @@ set(IMGUI_SOURCES
 
 set(SOURCE_FILES
   ${PATH_TO_FILES}/Window.cpp
+  ${PATH_TO_FILES}/UserInterface.cpp
   ${IMGUI_SOURCES}
   ${PATH_TO_FILES}/main.cpp
 )

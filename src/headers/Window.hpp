@@ -2,6 +2,7 @@
 #define A6F934DB_4D4D_4DB4_AFF0_B53D24CE1A57
 
 #include "interfaces/IWindow.hpp"
+#include "headers/UserInterface.hpp"
 #include "imgui.h"
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -10,6 +11,7 @@
 #include <memory>
 #include <chrono>
 
+class UserInterface;
 class Window : public IWindow
 {
 public:
@@ -18,6 +20,9 @@ public:
   void onInit()     override;
   void onRender()   override;
   void onDestroy()  override;
+
+  GLFWwindow* getWindowPtr()   const { return m_window; }
+	const char* getGLSLVersion() const { return m_glsl_version;	}
 
   ~Window();
 
@@ -35,6 +40,7 @@ private:
 	bool        m_show_demo;
 	const char* m_glsl_version;
 	double      m_fps;
+  std::unique_ptr<UserInterface> m_ui;
 	std::chrono::high_resolution_clock::time_point m_frameStart;
 	std::chrono::high_resolution_clock::time_point m_frameEnd;
 };

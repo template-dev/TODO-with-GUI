@@ -6,8 +6,9 @@ Window::Window(int width /* = 0 */, int height /* = 0 */, const char* title /* =
   , m_height(height)
   , m_title(title)
   , m_show_demo(true)
-  , m_glsl_version("#version 130")
+  , m_glsl_version("#version 330")
   , m_fps(0.0)
+  , m_ui(std::make_unique<UserInterface>(this))
 {}
 
 void Window::onInit()
@@ -25,17 +26,20 @@ void Window::onInit()
 
   glfwMakeContextCurrent(m_window);
   glfwSwapInterval(1);
+
+  m_ui->onInit();
 }
 
 void Window::onRender()
 {
-  ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+  ImVec4 clear_color = ImVec4(1.0f, 1.0f, 1.0f, 1.00f);
   while (!glfwWindowShouldClose(m_window))
   {
     m_frameStart = std::chrono::high_resolution_clock::now();
     glfwPollEvents();
 
     //ImGui
+    m_ui->onRender();
 
     glfwGetFramebufferSize(m_window, &m_width, &m_height);
     glViewport(0, 0, m_width, m_height);
@@ -52,6 +56,7 @@ void Window::onRender()
 
 void Window::onDestroy()
 {
+  m_ui->onDestroy();
   glfwDestroyWindow(m_window);
   glfwTerminate();
 }
