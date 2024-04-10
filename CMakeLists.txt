@@ -1,13 +1,12 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-set(PROJECT_NAME "Todo_JSON")
+set(PROJECT_NAME "Todo")
 set(EXTERNAL_LIBS_DIR "${CMAKE_CURRENT_SOURCE_DIR}/external-libs")
 set(PATH_TO_FILES "${CMAKE_CURRENT_SOURCE_DIR}/src/")
 
 project(${PROJECT_NAME})
 
 include(FetchContent)
-
 FetchContent_Declare(json
     GIT_REPOSITORY https://github.com/nlohmann/json
     GIT_TAG v3.11.3
@@ -17,17 +16,17 @@ FetchContent_MakeAvailable(json)
 #configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/tasks.json ${CMAKE_CURRENT_BINARY_DIR}/src/tasks.json COPYONLY)
 
 set(INTERFACE_FILES
-  ${PATH_TO_FILES}/headers/interfaces/ITaskManager.hpp
+  ${PATH_TO_FILES}/headers/interfaces/IWindow.hpp
 )
 
 
 set(HEADER_FILES
-  ${PATH_TO_FILES}/headers/TaskManager.hpp
+  ${PATH_TO_FILES}/headers/Window.hpp
 )
 
 set(SOURCE_FILES
-  ${PATH_TO_FILES}/TaskManager.cpp
-  ${PATH_TO_FILES}/app.cpp
+  ${PATH_TO_FILES}/Window.cpp
+  ${PATH_TO_FILES}/main.cpp
 )
 
 add_executable(
